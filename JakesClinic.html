@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Get the Number of Patients and Workers in JavaScript</title>
+
+<script>
+
+
+  // Form 1 <a href="IMG_7015.jpg">Small Clinic Form</a><br>
+  // Form 2 <a href="SCAN.pdf">Large Clinic Form</a><br>
+	
+  function getClinicSize() {
+                     	
+	  var err_msg = " ";
+	  var small_clinic = " ";
+	  var staff_needed = 0;
+	
+	  // Get input values from screen
+	    
+	  var TotalVaccines = document.getElementById("S_Vaccines").value;
+	  var DailyStaff = document.getElementById("S_Employees").value;
+	  var DailyHours = document.getElementById("S_Hours").value;
+	  var Days = document.getElementById("S_Days").value;
+	  var LanePref = document.getElementById("S_Lanes").value;
+
+	  // No Vaccines entered
+        
+	  if (TotalVaccines == 0) {
+		  err_msg = "You must enter Total Number of Vaccines";
+		  alert(err_msg);    
+    } else if (TotalVaccines <= 2200) {
+		  small_clinic = "X";
+	  } 
+
+	  // No Daily Staff entered
+
+    if (DailyStaff == 0) {
+		  err_msg = "You must enter Daily Staff";
+		  alert(err_msg);    
+	  } 
+
+	  // No Hours / Day entered
+
+    if (DailyHours == 0) {
+		  err_msg = "You must enter Number of Hours / Day ";
+		  alert(err_msg);    
+	  } 
+
+	  // No Days entered
+
+    if (Days == 0) {
+		  err_msg = "You must enter number of Days";
+		  alert(err_msg);    
+	  } 
+
+	  // Display Clinic Size
+	
+	  if (err_msg == " ") {
+
+		  if (small_clinic == "X") {
+						
+			  if ( DailyHours * Days * "28" >= TotalVaccines ) {
+				  alert("Small Clinic 1 Lane");
+				  staff_needed = 5;
+			  } else if ( DailyHours * Days * "49" >= TotalVaccines ) {
+				  alert("Small Clinic 2 Lane");			
+				  staff_needed = 10;
+			  } else if ( DailyHours * Days * "65" >= TotalVaccines ) {
+				  alert("Small Clinic 3 Lane");		
+				  staff_needed = 15;	
+			  } else {
+				  err_msg = "Increase number of days due high volume of vaccines";
+				  alert(err_msg);
+			  }
+ 
+      } else {
+	
+			  if ( DailyHours * Days * "42" >= TotalVaccines ) {
+				  alert("Large Clinic 1 Lane");
+				  staff_needed = 7;
+			  } else if ( DailyHours * Days * "80" >= TotalVaccines ) {
+				  alert("Large Clinic 2 Lane");	
+				  staff_needed = 14;		
+			  } else if ( DailyHours * Days * "113" >= TotalVaccines ) {
+				  alert("Large Clinic 3 Lane");	
+				  staff_needed = 21;		
+			  } else {
+				  err_msg = "Increase number of days due high volume of vaccines";
+				  alert(err_msg);
+			  }
+
+		  }
+         
+	  }
+
+	  if (err_msg == " ") {
+		
+		  if (DailyStaff < staff_needed) {
+		
+			  err_msg = "Daily Staff of " + DailyStaff + " is less than the required staff of " + staff_needed; 	
+			  alert(err_msg);
+
+		  }
+			
+		  var link = document.querySelector("a"); 
+		
+      if (small_clinic == "X") {
+ 		    link.getAttribute("href"); 
+        // link.setAttribute("href", "https://www.google.com/"); 
+        link.setAttribute("href", "SAB - LIB.pdf"); 
+        link.textContent = "Small Clinic Reference Document"; 
+      } else {
+        link.getAttribute("href"); 
+   		  link.setAttribute("href", "MP - LIB.pdf"); 
+        // link.setAttribute("href", "https://www.ebay.com"); 
+   		  link.textContent = "Large Clinic Reference Document"; 
+      }
+
+	  }
+
+    return false;
+    
+  }
+    
+</script>
+
+</head>
+
+<body>
+
+   <form id="frm1" action="/action_page.php" onsubmit="return getClinicSize()">
+      
+    Total Expected Vaccines: <input type="number" value="200" min="1" max="10000" placeholder="Patients" id="S_Vaccines"><br><br>
+    Daily Staff: <input type="number" value="10" min="1" max="1000" placeholder="Staff" id="S_Employees"> <br>
+    Hours / Day: <input type="number" value="8" min="1" max="24" placeholder="Hours per Day" id="S_Hours"><br>
+    Working Days: <input type="number" value="14" min="1" max="1000" placeholder="Days of Work" id="S_Days"><br>
+    Lane Preference: <input type="number" min="1" max="3" placeholder="Lane Preference" id="S_Lanes"><br><br>
+      
+    <input type="submit" value="Submit"> 
+	
+    <lf>
+   
+  </form>
+  
+  <a id="RefGuide" href='https://google.com/'> </a>  
+   
+  <p id="TextReturned"></p>
+
+</body>
+     
+</html>
